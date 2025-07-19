@@ -1,0 +1,17 @@
+# write your .gitignore file rules here
+# Ignore node_modules directory
+node_modules/
+# Ignore build output directory
+dist/
+# Ignore log files
+*.log
+# Ignore environment variable files
+.env
+# Ignore temporary files
+*.tmp
+# Ignore coverage reports
+coverage/
+# Ignore IDE specific files
+.idea/
+# Ignore OS generated files
+.DS_Store
