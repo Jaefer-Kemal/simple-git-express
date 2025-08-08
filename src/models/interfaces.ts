@@ -1,32 +1,51 @@
 import mongoose, { Document } from 'mongoose';
 
-// Interface for the Git model
+// Nested types for stats and changes
+interface IChange {
+  fileName: string;
+  added: number;
+  removed: number;
+}
+
+interface IStats {
+  files_changed: number;
+  files_added: number;
+  files_removed: number;
+  lines_added: number;
+  lines_removed: number;
+}
+
+// Repository interface
 interface IRepository extends Document {
   _id: mongoose.Types.ObjectId;
   name: string;
   description?: string;
   path: string;
   status: 'active' | 'missing' | 'moved' | 'deleted';
+  developerId: mongoose.Types.ObjectId;
+  projectId: mongoose.Types.ObjectId;
   permission: 'read' | 'read-write';
+  repoFingerprint: string;
+  lastSyncedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
-  lastSyncedAt?: Date;
 }
 
+// GitData interface
 interface IGitData extends Document {
   _id: mongoose.Types.ObjectId;
   repoId: mongoose.Types.ObjectId;
-  commitHash: string;
-  message: string;
-  date: Date;
-  filesChanged: number;
-  insertions: number;
-  deletions: number;
+  projectId: mongoose.Types.ObjectId;
   branch: string;
-  fileNames: string[];
-  pullCount: number;
-  createdAt: Date;
+  message: string;
+  commitHash: string;
+  date: Date;
+  stats: IStats;
+  changes: IChange[];
+  parentCommit?: string | null; // ObjectId if you switch to populate
   synced: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-export { IRepository, IGitData };
+export { IRepository, IGitData, IStats, IChange };
