@@ -106,7 +106,7 @@ your-repo-name/
 ├── src/
 │   ├── routes/              # Express routers (the "Orchestrators")
 │   ├── services/            # Pure business logic classes (the "Workers")
-│   ├── controllers/         # (Optional) Controller functions used by routes
+│   ├── controllers/         # Controller functions used by routes
 │   ├── config/              # Database configurations (git.db.ts, session.db.ts)
 │   ├── jobs/                # Background schedulers (scheduler.ts)
 │   ├── middleware/          # Express middleware (error.middleware.ts)
@@ -121,18 +121,18 @@ your-repo-name/
 
 ## API Endpoints
 
-All endpoints are prefixed with `/api/git`.
+All endpoints are prefixed with `/api`.
 
 | Method | Endpoint                                 | Description                                                                   |
 | :----- | :--------------------------------------- | :---------------------------------------------------------------------------- |
-| POST   | `/register-repo`                         | Validates and registers a new local repository with the backend.              |
-| PATCH  | `/update-repo/:repoId`                   | Updates a repository's name/description on the backend and locally.           |
-| GET    | `/repositories/status-check`             | Checks the status of all local repos and syncs their status to the backend.   |
-| GET    | `/compare-repos`                         | Compares local and remote repository lists and returns the differences.       |
-| GET    | `/get-repo`                              | Provides a consolidated, annotated view of all repositories.                  |
-| GET    | `/extract-new-commits/:repoId`           | Extracts new commits from a repo and saves them to the local SQLite DB.       |
-| POST   | `/sync-unsynced-commits/:repoId`         | Sends all unsynced commits from the local DB to the NestJS backend.           |
-
+| POST   | `git/register-repo`                         | Validates and registers a new local repository with the backend.              |
+| PATCH  | `git/update-repo/:repoId`                   | Updates a repository's name/description on the backend and locally.           |
+| GET    | `git/repositories/status-check`             | Checks the status of all local repos and syncs their status to the backend.   |
+| GET    | `git/compare-repos`                         | Compares local and remote repository lists and returns the differences.       |
+| GET    | `git/get-repo`                              | Provides a consolidated, annotated view of all repositories.                  |
+| GET    | `git/extract-new-commits/:repoId`           | Extracts new commits from a repo and saves them to the local SQLite DB.       |
+| POST   | `git/sync-unsynced-commits/:repoId`         | Sends all unsynced commits from the local DB to the NestJS backend.           |
+| POST   | `auth/simulate-login`                       | Login to the developer credentails using email and password                   |
 ---
 
 ## How the Sync Process Works
